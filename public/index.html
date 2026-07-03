@@ -4,131 +4,120 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CodeTutor - Professor de Lógica</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { 
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-      background-color: #1e1e2e; 
-      color: #cdd6f4;
-      display: flex;
-      justify-content: center;
-      padding: 40px 20px;
-      min-height: 100vh;
+  
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'Segoe UI', 'sans-serif'],
+          }
+        }
+      }
     }
-    .container {
-      background: #313244;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-      width: 100%;
-      max-width: 800px;
-    }
-    h1 {
-      color: #89b4fa; 
-      font-size: 28px;
-      margin-bottom: 10px;
-    }
-    p {
-      color: #a6adc8;
-      font-size: 16px;
-      margin-bottom: 20px;
-      line-height: 1.5;
-    }
-    textarea { 
-      width: 100%; 
-      height: 100px; 
-      padding: 16px;
-      font-size: 16px;
-      font-family: 'Courier New', Courier, monospace;
-      background-color: #181825;
-      color: #cdd6f4;
-      border: 1px solid #45475a;
-      border-radius: 8px;
-      resize: vertical;
-      outline: none;
-    }
-    textarea:focus { border-color: #89b4fa; }
-    button { 
-      padding: 14px 24px; 
-      font-size: 16px; 
-      font-weight: bold;
-      cursor: pointer; 
-      background-color: #89b4fa;
-      color: #11111b;
-      border: none;
-      border-radius: 8px;
-      margin-top: 16px;
-      transition: background 0.2s;
-    }
-    button:hover { background-color: #74c7ec; }
-    button:disabled { background-color: #45475a; cursor: not-allowed; }
-    .resultado-box {
-      margin-top: 30px;
-      display: none;
-    }
-    h2 {
-      color: #a6e3a1; 
-      font-size: 20px;
-      margin-bottom: 15px;
-    }
-    pre { 
-      white-space: pre-wrap; 
-      background: #11111b; 
-      padding: 20px; 
-      border-radius: 8px;
-      font-family: 'Courier New', Courier, monospace;
-      color: #cdd6f4;
-      line-height: 1.6;
-      border-left: 4px solid #89b4fa;
-    }
-  </style>
+  </script>
 </head>
-<body>
+<body class="bg-slate-900 text-slate-200 font-sans min-h-screen flex justify-center py-10 px-4 sm:px-6">
 
-  <div class="container">
-    <h1>CodeTutor - Seu Professor de Lógica</h1>
-    <p>Digite um conceito de programação que você não entendeu ou uma dúvida de código. O professor vai te explicar de forma didática, com exemplos e exercícios.</p>
+  <div class="bg-slate-800 p-8 sm:p-10 rounded-3xl shadow-2xl shadow-black/50 w-full max-w-3xl border border-slate-700 h-fit">
+    
+    <div class="mb-8">
+      <h1 class="text-3xl sm:text-4xl font-bold text-sky-400 mb-4 tracking-tight flex items-center gap-3">
+        👨‍🏫 CodeTutor: Professor de Lógica
+      </h1>
+      
+      <div class="bg-slate-900/50 border border-slate-700 p-5 sm:p-6 rounded-2xl">
+        <p class="text-slate-300 leading-relaxed mb-4">
+          Olá! Sou o seu tutor inteligente especialista em desenvolvimento de software e algoritmos. Estou aqui para traduzir conceitos complexos de programação em explicações fáceis de entender. 
+        </p>
+        
+        <p class="text-slate-400 text-sm font-semibold uppercase tracking-wider mb-2">Como eu vou te ajudar:</p>
+        <ul class="space-y-2 text-slate-300 text-sm sm:text-base">
+          <li class="flex items-start gap-2">
+            <span class="text-emerald-400 mt-0.5">✔</span> 
+            <span><strong>Analogias Simples:</strong> Explico o código usando exemplos do seu dia a dia.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-emerald-400 mt-0.5">✔</span> 
+            <span><strong>Prática Direta:</strong> Te mostro o código funcionando na prática.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-emerald-400 mt-0.5">✔</span> 
+            <span><strong>Exercícios de Fixação:</strong> Sempre te passo um desafio rápido para testar se você aprendeu.</span>
+          </li>
+        </ul>
 
-    <textarea id="prompt" placeholder="Ex.: O que é um loop 'for' e quando devo usar ele em vez de 'while'?"></textarea>
-
-    <button id="btn-enviar" onclick="enviar()">Tirar Dúvida</button>
-
-    <div class="resultado-box" id="resultado-box">
-      <h2>Explicação do Professor</h2>
-      <pre id="resposta"></pre>
+        <div class="mt-5 pt-4 border-t border-slate-700/50 flex items-center gap-2 text-sky-400 text-xs sm:text-sm font-medium">
+          <span>⚠️</span> Atenção: Meu conhecimento é restrito à tecnologia. Não respondo sobre outros assuntos!
+        </div>
+      </div>
     </div>
+    
+    <p class="text-slate-400 mb-3 text-sm font-medium">Comece com uma dúvida comum:</p>
+    <div class="flex flex-wrap gap-3 mb-6">
+      <button class="bg-slate-700 text-sky-300 border border-slate-600 hover:bg-slate-600 hover:border-slate-500 hover:text-emerald-300 px-5 py-2 rounded-full text-sm font-medium transition-all" onclick="usarSugestao('O que é uma variável do tipo Array? Me explique com uma analogia.')">
+        O que é um Array?
+      </button>
+      <button class="bg-slate-700 text-sky-300 border border-slate-600 hover:bg-slate-600 hover:border-slate-500 hover:text-emerald-300 px-5 py-2 rounded-full text-sm font-medium transition-all" onclick="usarSugestao('Qual a diferença entre um loop FOR e um loop WHILE?')">
+        FOR vs WHILE
+      </button>
+      <button class="bg-slate-700 text-sky-300 border border-slate-600 hover:bg-slate-600 hover:border-slate-500 hover:text-emerald-300 px-5 py-2 rounded-full text-sm font-medium transition-all" onclick="usarSugestao('O que é uma Função na programação e por que devemos usar?')">
+        O que é uma Função?
+      </button>
+    </div>
+    
+    <textarea id="prompt" class="w-full h-32 p-5 rounded-2xl border-2 border-slate-600 focus:border-emerald-400 focus:ring-4 focus:ring-emerald-400/20 outline-none resize-y text-slate-100 bg-slate-900 transition-all placeholder:text-slate-500" placeholder="Digite sua própria dúvida aqui... Ex.: O que é um loop 'for' e quando devo usar ele em vez de 'while'?"></textarea>
+    
+    <button id="btn-enviar" class="w-full bg-emerald-500 hover:bg-emerald-400 disabled:bg-slate-700 disabled:text-slate-500 disabled:cursor-not-allowed text-slate-900 font-bold text-lg py-4 px-6 rounded-2xl mt-4 transition-all shadow-lg shadow-emerald-500/20" onclick="enviar()">
+      Tirar Dúvida
+    </button>
+
+    <div class="mt-10 hidden bg-slate-900 border border-slate-700 p-6 sm:p-8 rounded-3xl shadow-inner" id="resultado-box">
+      <h2 class="text-xl font-bold text-sky-400 mb-6 flex items-center gap-2">
+        Resposta do Professor
+      </h2>
+      <div id="resposta" class="prose prose-invert prose-slate max-w-none prose-a:text-emerald-400 prose-headings:text-sky-400 prose-pre:bg-slate-950 prose-pre:border prose-pre:border-slate-800 prose-pre:rounded-2xl"></div>
+    </div>
+
   </div>
 
   <script>
+    function usarSugestao(pergunta) {
+      document.getElementById("prompt").value = pergunta;
+    }
+
     async function enviar() {
       const prompt = document.getElementById("prompt").value;
       const outputBox = document.getElementById("resultado-box");
       const output = document.getElementById("resposta");
       const btn = document.getElementById("btn-enviar");
-
+      
       if(!prompt.trim()) return;
 
       btn.disabled = true;
-      btn.textContent = "Professor está digitando...";
+      btn.textContent = "Professor está analisando sua dúvida...";
       outputBox.style.display = "block";
-      output.textContent = "Processando sua dúvida...";
-
+      output.innerHTML = "<p class='animate-pulse text-emerald-400 font-medium'>Processando sua dúvida...</p>";
+      
       try {
         const response = await fetch("/api/llm", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ prompt })
         });
-
+        
         const data = await response.json();
-
+        
         if (!response.ok) {
-          output.textContent = data.erro || "Erro desconhecido.";
+          output.innerHTML = marked.parse(data.erro || "Erro desconhecido.");
         } else {
-          output.textContent = data.resposta;
+          output.innerHTML = marked.parse(data.resposta);
         }
       } catch (error) {
-        output.textContent = "Erro ao conectar com a API local.";
+        output.innerHTML = "<p class='text-red-400 font-medium'>Erro ao conectar com a API local.</p>";
       } finally {
         btn.disabled = false;
         btn.textContent = "Tirar Dúvida";

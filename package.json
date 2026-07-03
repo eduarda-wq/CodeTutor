@@ -2,11 +2,15 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "configurar-css": "tailwindcss init"
   },
   "dependencies": {
     "cors": "latest",
     "dotenv": "latest",
     "express": "latest"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
   }
 }

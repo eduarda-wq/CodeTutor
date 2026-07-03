@@ -5,7 +5,7 @@ import "dotenv/config";
 const app = express();
 const PORT = 3000;
 const API_KEY = process.env.OPENROUTER_API_KEY;
-const MODEL = "openai/gpt-oss-120b:free"; 
+const MODEL = "openai/gpt-oss-120b:free"; // Modelo exigido na atividade
 
 if (!API_KEY) {
   console.error("Erro: configure OPENROUTER_API_KEY no arquivo .env.");
@@ -19,7 +19,8 @@ app.use(express.static("public"));
 app.post("/api/llm", async (req, res) => {
   try {
     const prompt = req.body.prompt;
-
+    
+    // Validação da entrada do usuário
     if (!prompt || prompt.trim().length === 0) {
       return res.status(400).json({ erro: "O campo prompt é obrigatório." });
     }
@@ -40,14 +41,14 @@ app.post("/api/llm", async (req, res) => {
         messages: [
           {
             role: "system",
-            content: "Você é um professor de lógica de programação didático e paciente. O aluno enviará uma dúvida. Sua tarefa é responder obrigatoriamente estruturado em três partes: 1) Explicação conceitual simples usando analogias do dia a dia. 2) Um exemplo prático de código, preferencialmente em JavaScript. 3) Um exercício simples para o aluno testar o conhecimento recém-adquirido."
+            content: "Você é um professor de lógica de programação didático. ATENÇÃO: Sua área de conhecimento é ESTRITAMENTE programação, algoritmos, tecnologia e lógica. SE o aluno perguntar sobre QUALQUER outro assunto (ex: receitas, esportes, história, conselhos pessoais), VOCÊ DEVE RECUSAR a resposta informando educadamente que o seu propósito é ensinar apenas programação e você não pode ajudar com outros temas. SE a pergunta for de programação, responda estruturado em três partes: 1) Explicação conceitual usando analogias. 2) Exemplo de código. 3) Exercício de fixação."
           },
           {
             role: "user",
             content: prompt
           }
         ],
-        temperature: 0.7,
+        temperature: 0.5, // Diminuímos um pouco a temperatura para ele seguir a regra com mais rigor
         max_completion_tokens: 700
       })
     });
