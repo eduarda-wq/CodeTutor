@@ -41,7 +41,7 @@ Você precisará ter instalado em sua máquina:
 ### 2. Clonando o Projeto
 Abra o seu terminal e execute:
 ```bash
-git clone https://github.com/eduarda-wq/CodeTutor
+git clone https://github.com/eduarda-wq/CodeTutor.git
 cd CodeTutor
 ```
 *(Se você já baixou os arquivos manualmente, apenas abra o terminal dentro da pasta do projeto).*
